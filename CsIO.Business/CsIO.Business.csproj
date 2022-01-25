@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
     <Compile Include="Models\Fornecedores\Endereco.cs" />
     <Compile Include="Models\Fornecedores\Enums\ETipoFornecedor.cs" />
     <Compile Include="Models\Fornecedores\Fornecedor.cs" />
+    <Compile Include="Models\Fornecedores\Interfaces\IEnderecoRepository.cs" />
+    <Compile Include="Models\Fornecedores\Interfaces\IFornecedorRepository.cs" />
+    <Compile Include="Models\Produtos\Interfaces\IProdutoRepository.cs" />
     <Compile Include="Models\Produtos\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
