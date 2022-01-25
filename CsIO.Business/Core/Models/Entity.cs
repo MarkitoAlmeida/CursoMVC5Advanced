@@ -15,7 +15,7 @@ namespace CsIO.Business.Core.Models
 
         #region Properties
 
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
 
         #endregion
     }

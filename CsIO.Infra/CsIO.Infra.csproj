@@ -55,6 +55,7 @@
     <Compile Include="Data\Mappings\EnderecoMap.cs" />
     <Compile Include="Data\Mappings\FornecedorMap.cs" />
     <Compile Include="Data\Mappings\ProdutoMap.cs" />
+    <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
