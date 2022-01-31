@@ -3,6 +3,6 @@
     public enum ETipoFornecedor
     {
         PessoaFisica = 1,
-        PessoaJurica = 2
+        PessoaJuridica = 2
     }
 }

@@ -1,5 +1,5 @@
 ﻿using CsIO.Business.Models.Fornecedores;
-using CsIO.Business.Models.Fornecedores.Interfaces;
+using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
 using System;
 using System.Threading.Tasks;
 

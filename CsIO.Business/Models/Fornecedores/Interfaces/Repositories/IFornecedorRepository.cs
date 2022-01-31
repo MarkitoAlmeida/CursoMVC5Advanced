@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace CsIO.Business.Models.Fornecedores.Interfaces
+namespace CsIO.Business.Models.Fornecedores.Interfaces.Repositories
 {
     public interface IFornecedorRepository : IRepository<Fornecedor>
     {
