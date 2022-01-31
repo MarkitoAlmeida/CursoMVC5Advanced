@@ -1,6 +1,7 @@
 ﻿using CsIO.Business.Core.Services;
 using CsIO.Business.Models.Produtos.Interfaces;
 using CsIO.Business.Models.Produtos.Validations;
+using CsIO.Business.Notifications;
 using System;
 using System.Threading.Tasks;
 
@@ -10,7 +11,8 @@ namespace CsIO.Business.Models.Produtos.Services
     {
         private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoService(IProdutoRepository produtoRepository)
+        public ProdutoService(IProdutoRepository produtoRepository,
+                              INotification notification) : base(notification)
         {
             _produtoRepository = produtoRepository;
         }

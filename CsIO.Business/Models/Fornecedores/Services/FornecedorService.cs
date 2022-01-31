@@ -2,6 +2,7 @@
 using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
 using CsIO.Business.Models.Fornecedores.Interfaces.Services;
 using CsIO.Business.Models.Fornecedores.Validations;
+using CsIO.Business.Notifications;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ namespace CsIO.Business.Models.Fornecedores.Services
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IEnderecoRepository _enderecoRepository;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository, IEnderecoRepository enderecoRepository)
+        public FornecedorService(IFornecedorRepository fornecedorRepository,
+                                 IEnderecoRepository enderecoRepository,
+                                 INotification notification) : base(notification)
         {
             _fornecedorRepository = fornecedorRepository;
             _enderecoRepository = enderecoRepository;
@@ -38,7 +41,10 @@ namespace CsIO.Business.Models.Fornecedores.Services
                 return;
 
             if (await FornecedorExiste(fornecedor))
+            {
+                Notificar("O Fornecedor possui produtos cadastrados.");
                 return;
+            }   
 
             await _fornecedorRepository.Atualizar(fornecedor);
         }
@@ -48,7 +54,10 @@ namespace CsIO.Business.Models.Fornecedores.Services
             var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
 
             if (fornecedor.Produtos.Any())
+            {
+                Notificar("O Fornecedor possui produtos cadastrados.");
                 return;
+            }
 
             if (fornecedor.Endereco != null)
                 await _enderecoRepository.Remover(fornecedor.Endereco.Id);
@@ -69,7 +78,12 @@ namespace CsIO.Business.Models.Fornecedores.Services
             var fornecedorAtual = await _fornecedorRepository
                                             .Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
 
-            return fornecedorAtual.Any();
+            if (fornecedorAtual.Any())
+                return false;
+
+            Notificar("Já existe um fornecedor com este documento.");
+
+            return true;
         }
 
         public void Dispose()

@@ -62,6 +62,9 @@
     <Compile Include="Models\Produtos\Produto.cs" />
     <Compile Include="Models\Produtos\Services\ProdutoService.cs" />
     <Compile Include="Models\Produtos\Validations\ProdutoValidation.cs" />
+    <Compile Include="Notifications\INotification.cs" />
+    <Compile Include="Notifications\Notificacao.cs" />
+    <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
