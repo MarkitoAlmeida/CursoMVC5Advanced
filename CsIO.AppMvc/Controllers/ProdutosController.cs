@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
-using CsIO.AppMvc.Models;
 using CsIO.AppMvc.ViewModels;
 using CsIO.Business.Models.Produtos;
 using CsIO.Business.Models.Produtos.Interfaces;
-using CsIO.Business.Models.Produtos.Services;
-using CsIO.Business.Notifications;
-using CsIO.Infra.Data.Repositories;
 
 namespace CsIO.AppMvc.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoService _produtoService;

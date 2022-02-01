@@ -9,11 +9,7 @@ using CsIO.Infra.Data.Repositories;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CsIO.AppMvc.App_Start
