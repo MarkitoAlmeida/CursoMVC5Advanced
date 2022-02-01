@@ -17,9 +17,9 @@ namespace CsIO.AppMvc.Controllers
         private readonly IFornecedorService _fornecedorService;
 
         // Construtor sem Injeção de Dependência => A ser implementado a ID
-        public FornecedorController()
+        public FornecedorController(IFornecedorService fornecedorService)
         {
-            _fornecedorService = new FornecedorService(new FornecedorRepository(), new EnderecoRepository());
+            _fornecedorService = fornecedorService;
         }
 
         // GET: Fornecedor
