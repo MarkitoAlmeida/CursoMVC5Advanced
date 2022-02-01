@@ -15,9 +15,9 @@ namespace CsIO.Infra.Data.Repositories
         protected readonly CsIoContext csIOContext;
         protected readonly DbSet<TEntity> dbSet;
 
-        public Repository()
+        public Repository(CsIoContext context)
         {
-            csIOContext = new CsIoContext();
+            csIOContext = context;
             dbSet = csIOContext.Set<TEntity>();
         }
 

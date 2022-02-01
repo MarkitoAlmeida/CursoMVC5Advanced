@@ -1,16 +1,18 @@
 ﻿using CsIO.Business.Models.Produtos;
 using CsIO.Business.Models.Produtos.Interfaces;
+using CsIO.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CsIO.Infra.Data.Repositories
 {
     public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
+        public ProdutoRepository(CsIoContext context) : base(context) { }
+
         public async Task<Produto> ObterProdutosFornecedor(Guid id)
         {
             return await csIOContext.Produtos
