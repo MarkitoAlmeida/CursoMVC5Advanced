@@ -1,4 +1,5 @@
-﻿@model CsIO.AppMvc.ViewModels.FornecedorViewModel
+﻿@using CsIO.Business.Models.Fornecedores.Enums
+@model CsIO.AppMvc.ViewModels.FornecedorViewModel
 
 @{
     ViewBag.Title = "Editar Fornecedor";
@@ -37,8 +38,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TipoFornecedor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">
-                @Html.RadioButtonFor(m => m.TipoFornecedor, "1") Pessoa Física <br />
-                @Html.RadioButtonFor(m => m.TipoFornecedor, "2") Pessoa Jurídica
+                @Html.RadioButtonFor(m => m.TipoFornecedor, ETipoFornecedor.PessoaFisica) Pessoa Física <br />
+                @Html.RadioButtonFor(m => m.TipoFornecedor, ETipoFornecedor.PessoaJuridica) Pessoa Jurídica
             </div>
         </div>
 
