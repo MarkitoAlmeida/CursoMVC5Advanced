@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using CsIO.AppMvc.ViewModels;
+using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
 using CsIO.Business.Models.Produtos;
 using CsIO.Business.Models.Produtos.Interfaces;
 
@@ -12,14 +13,18 @@ namespace CsIO.AppMvc.Controllers
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
+        
 
         public ProdutosController(IProdutoRepository produtoRepository,
+                                  IFornecedorRepository fornecedorRepository,
                                   IProdutoService produtoService,
                                   IMapper mapper)
         {
             _produtoRepository = produtoRepository;
+            _fornecedorRepository = fornecedorRepository;
             _produtoService = produtoService;
             _mapper = mapper;
         }
@@ -29,7 +34,7 @@ namespace CsIO.AppMvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
 
         // GET: Produtos/Details/5
@@ -48,9 +53,11 @@ namespace CsIO.AppMvc.Controllers
         // GET: Produtos/Create
         [Route("novo-produto")]
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
+
+            return View(produtoViewModel);
         }
 
         // POST: Produtos/Create
@@ -59,8 +66,10 @@ namespace CsIO.AppMvc.Controllers
         [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProdutoViewModel produtoViewModel)
+        public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
         {
+            produtoViewModel = await PopularFornecedores(produtoViewModel);
+
             if (ModelState.IsValid)
             {
                 _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
@@ -133,6 +142,13 @@ namespace CsIO.AppMvc.Controllers
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
             var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutosFornecedor(id));
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            return produto;
+        }
+
+        private async Task<ProdutoViewModel> PopularFornecedores(ProdutoViewModel produto)
+        {
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
         }
 
