@@ -72,7 +72,7 @@ namespace CsIO.AppMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+                await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
                 return RedirectToAction("Index");
             }

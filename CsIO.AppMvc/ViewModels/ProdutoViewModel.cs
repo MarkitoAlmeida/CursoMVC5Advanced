@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CsIO.AppMvc.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 
 namespace CsIO.AppMvc.ViewModels
 {
@@ -34,6 +34,7 @@ namespace CsIO.AppMvc.ViewModels
 
         public string Imagem { get; set; }
 
+        [Moeda]
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public decimal Valor { get; set; }
 

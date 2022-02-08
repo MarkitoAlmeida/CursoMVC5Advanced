@@ -44,7 +44,7 @@
                 <td class="text-right">
                     <a class="btn btn-warning" href="@Url.Action("Details", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
 
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })@*.PermitirExibicao("Produto", "Editar")*@
+                    @*@html.actionlink("editar", "edit", new { id = item.id }, new { @class = "btn btn-info" }).permitirexibicao("produto", "editar")*@
 
                     <a class="btn btn-info" href="@*@Url.ActionComPermissao("Edit", "Produtos", new {id = item.Id},"Produto", "Editar")*@"><spam class="glyphicon glyphicon-pencil"></spam></a>
 
