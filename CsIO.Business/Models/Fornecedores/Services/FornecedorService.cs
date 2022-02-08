@@ -24,6 +24,10 @@ namespace CsIO.Business.Models.Fornecedores.Services
 
         public async Task Adicionar(Fornecedor fornecedor)
         {
+            // Limitações do EF 6 fora da convenção
+            fornecedor.Endereco.Id = fornecedor.Id;
+            fornecedor.Endereco.Fornecedor = fornecedor;
+
             if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)
                 || !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco))
                 return;
