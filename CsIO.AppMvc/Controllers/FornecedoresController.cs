@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CsIO.AppMvc.Extensions;
 using CsIO.AppMvc.ViewModels;
 using CsIO.Business.Models.Fornecedores;
 using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
@@ -36,6 +37,7 @@ namespace CsIO.AppMvc.Controllers
             return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
         }
 
+        [AllowAnonymous]
         [Route("dados-do-fornecedor/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Details(Guid id)
@@ -48,12 +50,14 @@ namespace CsIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor","Adicionar")]
         [Route("novo-fornecedor")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [Route("novo-fornecedor")]
         [HttpPost]
         public async Task<ActionResult> Create(FornecedorViewModel fornecedorViewModel)
@@ -70,6 +74,7 @@ namespace CsIO.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("editar-fornecedor/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
@@ -82,6 +87,7 @@ namespace CsIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         public async Task<ActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
@@ -101,7 +107,7 @@ namespace CsIO.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Admin")]
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("excluir-fornecedor/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
@@ -114,7 +120,7 @@ namespace CsIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
-        [Authorize(Roles = "Admin")]
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
