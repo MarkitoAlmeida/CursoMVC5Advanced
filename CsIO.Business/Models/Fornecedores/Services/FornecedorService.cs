@@ -82,7 +82,7 @@ namespace CsIO.Business.Models.Fornecedores.Services
             var fornecedorAtual = await _fornecedorRepository
                                             .Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
 
-            if (fornecedorAtual.Any())
+            if (!fornecedorAtual.Any())
                 return false;
 
             Notificar("Já existe um fornecedor com este documento.");

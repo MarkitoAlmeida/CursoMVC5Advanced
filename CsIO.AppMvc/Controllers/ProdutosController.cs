@@ -9,6 +9,7 @@ using CsIO.AppMvc.ViewModels;
 using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
 using CsIO.Business.Models.Produtos;
 using CsIO.Business.Models.Produtos.Interfaces;
+using CsIO.Business.Notifications;
 
 namespace CsIO.AppMvc.Controllers
 {
@@ -23,7 +24,8 @@ namespace CsIO.AppMvc.Controllers
         public ProdutosController(IProdutoRepository produtoRepository,
                                   IFornecedorRepository fornecedorRepository,
                                   IProdutoService produtoService,
-                                  IMapper mapper)
+                                  IMapper mapper,
+                                  INotification notification) : base(notification)
         {
             _produtoRepository = produtoRepository;
             _fornecedorRepository = fornecedorRepository;

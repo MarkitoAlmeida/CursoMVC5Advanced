@@ -3,6 +3,7 @@ using CsIO.AppMvc.ViewModels;
 using CsIO.Business.Models.Fornecedores;
 using CsIO.Business.Models.Fornecedores.Interfaces.Repositories;
 using CsIO.Business.Models.Fornecedores.Interfaces.Services;
+using CsIO.Business.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,8 +18,9 @@ namespace CsIO.AppMvc.Controllers
         private readonly IMapper _mapper;
 
         public FornecedoresController(IFornecedorRepository fornecedorRepository,
-                                    IFornecedorService fornecedorService,
-                                    IMapper mapper)
+                                      IFornecedorService fornecedorService,
+                                      IMapper mapper,
+                                      INotification notification) : base(notification)
         {
             _fornecedorRepository = fornecedorRepository;
             _fornecedorService = fornecedorService;
@@ -60,8 +62,8 @@ namespace CsIO.AppMvc.Controllers
             var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
             await _fornecedorService.Adicionar(fornecedor);
 
-            // TODO:
-            // E se não der certo?
+            if (!OperacaoValida())
+                return View(fornecedorViewModel);
 
             return RedirectToAction("Index");
         }
