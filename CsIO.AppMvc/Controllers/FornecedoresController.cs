@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace CsIO.AppMvc.Controllers
 {
+    [Authorize]
     public class FornecedoresController : BaseController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
@@ -27,6 +28,7 @@ namespace CsIO.AppMvc.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [Route("lista-de-fornecedores")]
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -99,6 +101,7 @@ namespace CsIO.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("excluir-fornecedor/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
@@ -111,6 +114,7 @@ namespace CsIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)

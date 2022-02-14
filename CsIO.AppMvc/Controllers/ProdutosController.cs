@@ -13,6 +13,7 @@ using CsIO.Business.Notifications;
 
 namespace CsIO.AppMvc.Controllers
 {
+    [Authorize]
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
