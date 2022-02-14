@@ -45,10 +45,7 @@ namespace CsIO.Business.Models.Fornecedores.Services
                 return;
 
             if (await FornecedorExiste(fornecedor))
-            {
-                Notificar("O Fornecedor possui produtos cadastrados.");
                 return;
-            }   
 
             await _fornecedorRepository.Atualizar(fornecedor);
         }
